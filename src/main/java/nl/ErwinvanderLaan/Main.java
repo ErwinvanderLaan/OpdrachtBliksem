@@ -82,22 +82,63 @@ public class Main {
 
             if ( ch == 'q') break;
 
-            // calculating the travel distance between two lightning strikes
-            double traveldistance = arrayDistancesinKm [1] - arrayDistancesinKm [0] ;
+            // letting the user choose between distance in feet or distance in kilometers
+            do {
+                System.out.println("Do you want to know the travelled distance in feet or in kilometers?");
+                System.out.println("Press 1 for distance in feet");
+                System.out.print("Press 2 for distance in kilometers (or type 'q' to quit) ");
+                distance = (char) System.in.read ( );
 
+                do {
+                    ignore = (char) System.in.read ( );
+                }while (ignore != '\n') ;
+            }while (distance < '1' | distance > '2' & distance != 'q' );
 
-            // calculating the lightning speed between two lightning strikes
-            double lightningSpeed = traveldistance / timeBetween ;
-            System.out.println("The lightning speed is:" + lightningSpeed);
+            if (distance == 'q' ) break;
 
-            // calculating if and how fast the lightning will reach the user
-            if (traveldistance == 0)
-                System.out.println("The lightning has not moved");
-            else if (traveldistance < 0)
-                System.out.println("The lightning has moved away from you and will not reach you");
-            else if (traveldistance > 0)
-                System.out.println("The lightning has moved" + traveldistance + "kilometers towards you");
-                System.out.println("It will reach you in "+ (arrayDistancesinKm [1] / lightningSpeed ) + "seconds");
+            // calculating the travelled distance between two lightning strikes in feet / kilometers
+            switch(distance) {
+                // calculating the travel distance between two lightning strikes in feet
+                case '1':
+                    // calculating the travel distance in kilometers between two lightning strikes
+                    double traveldistanceFeet = arrayDistancesInFeet[1] - arrayDistancesInFeet[0];
+
+                    // calculating the lightning speed between two lightning strikes
+                    double lightningSpeedFeet = traveldistanceFeet / timeBetween;
+                    System.out.println("The lightning speed is: " + lightningSpeedFeet + " feet per second");
+
+                    // calculating if and how fast the lightning will reach the user
+                    if (traveldistanceFeet == 0)
+                        System.out.println("The lightning has not moved");
+                    else if (traveldistanceFeet < 0)
+                        System.out.println("The lightning has moved away from you and will not reach you");
+                    else if (traveldistanceFeet > 0)
+                        System.out.println("The lightning has moved " + traveldistanceFeet + " feet towards you");
+                        System.out.println("It will reach you in "+ (arrayDistancesinKm [1] / lightningSpeedFeet ) + " seconds");
+
+                    System.out.println("");
+                    break;
+
+                case '2':
+                    // calculating the travel distance in kilometers between two lightning strikes
+                    double traveldistance = arrayDistancesinKm[1] - arrayDistancesinKm[0];
+
+                    // calculating the lightning speed in kilometers between two lightning strikes
+                    double lightningSpeed = traveldistance / timeBetween;
+                    System.out.println("The lightning speed is: " + lightningSpeed + " kilometers per second");
+
+                    // calculating if and how fast the lightning will reach the user
+                    if (traveldistance == 0)
+                        System.out.println("The lightning has not moved");
+                    else if (traveldistance < 0)
+                        System.out.println("The lightning has moved away from you and will not reach you");
+                    else if (traveldistance > 0)
+                        System.out.println("The lightning has moved " + traveldistance + " kilometers towards you");
+                        System.out.println("It will reach you in "+ (arrayDistancesinKm [1] / lightningSpeed ) + " seconds");
+
+                    System.out.println("");
+                    break;
+            }
 
             arrayDistancesinKm [0] = arrayDistancesinKm [1];
 
